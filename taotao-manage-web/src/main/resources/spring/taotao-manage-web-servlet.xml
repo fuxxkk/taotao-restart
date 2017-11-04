@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 配置controller扫描 -->
-	<context:component-scan base-package="com.taotao.manage2.controller" />
+	<context:component-scan base-package="com.taotao.manage.controller" />
 
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
@@ -28,7 +28,7 @@
 	<dubbo:registry protocol="zookeeper" address="192.168.12.128:2181"/>
 
 	<!-- 声明要调用的服务，timeout是设置连接超时最长时间,如果不设置，超时时间默认是3秒 -->
-	<dubbo:reference interface="com.taotao.manage2.service.TestService"
+	<dubbo:reference interface="com.taotao.manage.service.TestService"
 		id="testService" timeout="1000000"  />
 	
 </beans>
