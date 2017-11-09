@@ -11,19 +11,10 @@ import com.taotao.manage.pojo.ItemCat;
 import com.taotao.manage.service.ItemCatService;
 
 @Service
-public class ItemCatServiceImp implements ItemCatService{
+public class ItemCatServiceImp extends BaseServiceImp<ItemCat> implements ItemCatService{
 	
 	@Autowired
 	private ItemCatMapper itemCatMapper;
 	
-	@Override
-	public List<ItemCat> queryItemCatByPage(Integer page, Integer rows) {
-		
-		PageHelper.startPage(page,rows);
-		
-		List<ItemCat> list = itemCatMapper.selectAll();
-		
-		return list;
-	}
 
 }

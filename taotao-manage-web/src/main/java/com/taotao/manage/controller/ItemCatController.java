@@ -26,7 +26,7 @@ public class ItemCatController {
 	public ResponseEntity<List<ItemCat>> queryItemcatByPage(@PathVariable Integer page,@RequestParam(value="rows",defaultValue="10") Integer rows){
 		
 		try {
-			List<ItemCat> list = itemCatService.queryItemCatByPage(page, rows);
+			List<ItemCat> list = itemCatService.queryListByPage(page, rows);
 			return ResponseEntity.ok().body(list);
 		} catch (Exception e) {
 			e.printStackTrace();
