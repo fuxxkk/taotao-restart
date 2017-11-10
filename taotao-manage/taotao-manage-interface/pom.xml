@@ -15,6 +15,14 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
+		<!-- taotao-common依赖 -->
+		<dependency>
+			<groupId>com.taotao</groupId>
+			<artifactId>taotao-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		
 		<!-- 分页助手 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
