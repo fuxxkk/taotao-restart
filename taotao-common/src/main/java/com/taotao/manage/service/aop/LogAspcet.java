@@ -21,7 +21,7 @@ public class LogAspcet {
 	
 	private ThreadLocal<Long> threadlocal = new ThreadLocal<>();
 	
-	@Pointcut(value="execution(* com.taotao.manage.service.*.*(..))")
+	@Pointcut(value="execution(* com.taotao.*.service.*.*(..))")
 	public void recordLog() {
 		
 	}
@@ -39,8 +39,7 @@ public class LogAspcet {
 		//获取参数
 		Object[] args = pjp.getArgs();
 		if(args!=null&&args.length>0) {
-			for(int i=0;i<args.length;i++) {
-				LOOGER.info("参数是"+i+":"+pjp.getArgs()[i]);
+			for(int i=0;i<args.length;i++) {				LOOGER.info("参数是"+(i+1)+":"+pjp.getArgs()[i]);
 			}
 		}
 		
