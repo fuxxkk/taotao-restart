@@ -9,6 +9,7 @@ import org.csource.fastdfs.StorageClient;
 import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.manage.fileuputils.FastDFSUtils;
 import com.taotao.manage.vo.PicUploadResult;
 
 @RequestMapping("pic")
@@ -52,26 +54,7 @@ public class PicUploadController {
 			try {
 				BufferedInputStream bufferedInputStream = new BufferedInputStream(multipartFile.getInputStream());
 				String trackConf = this.getClass().getClassLoader().getResource("tracker.conf").toString();
-				if(trackConf.split(":").length>2) {
-					trackConf = trackConf.replace("file:/", "");
-				}else {
-					trackConf = trackConf.replace("file:", "");
-				}
-				
-				ClientGlobal.init(trackConf);
-				TrackerClient trackerClient = new TrackerClient();
-				TrackerServer trackerServer = trackerClient.getConnection();
-				StorageServer storageServer = null;
-				StorageClient storageClient = new StorageClient(trackerServer, storageServer);
-				
-				//获取后缀名
-				String file_ext_name = StringUtils.substringAfter(multipartFile.getOriginalFilename(), ".");
-				String[] upload_filePath = storageClient.upload_file(multipartFile.getBytes(), file_ext_name, null);
-				
-				String url = TAOTAO_IMAGE_PATH;
-				for (String string : upload_filePath) {
-					url += "/"+string;
-				}
+				String url = FastDFSUtils.upload(trackConf,multipartFile, null, TAOTAO_IMAGE_PATH);
 				picUploadResult.setUrl(url);
 				picUploadResult.setError(0);
 				result = mapper.writeValueAsString(picUploadResult);
