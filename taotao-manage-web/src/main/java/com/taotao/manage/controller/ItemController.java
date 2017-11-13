@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.taotao.common.vo.DatagridResult;
 import com.taotao.manage.pojo.Item;
 import com.taotao.manage.service.ItemService;
 
@@ -39,5 +40,18 @@ public class ItemController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<DatagridResult> queryItemList(@RequestParam(value="title",required=false)String title,Integer page,Integer rows){
+		
+		try {
+			DatagridResult result = itemService.queryItemList(title, page, rows);
+			return ResponseEntity.ok().body(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.status(500).body(null);
 	}
 }
