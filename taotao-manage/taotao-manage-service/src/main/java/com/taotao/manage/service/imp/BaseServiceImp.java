@@ -91,7 +91,7 @@ public class BaseServiceImp<T extends BasePojo> implements BaseService<T> {
 		Example example = new Example(this.clazz);
 		Criteria criteria = example.createCriteria();
 		criteria.andIn("id", Arrays.asList(ids));
-		mapper.deleteByPrimaryKey(example);
+		mapper.deleteByExample(example);
 		
 	}
 

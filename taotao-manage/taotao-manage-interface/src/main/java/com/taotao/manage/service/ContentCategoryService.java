@@ -6,4 +6,6 @@ public interface ContentCategoryService extends BaseService<ContentCategory> {
 	
 	ContentCategory saveContentCategory(ContentCategory contentCategory);
 	
+	void deleteContentCategory(ContentCategory contentCategory);
+	
 }

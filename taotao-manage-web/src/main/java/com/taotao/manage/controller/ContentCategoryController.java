@@ -20,7 +20,7 @@ public class ContentCategoryController {
 	private ContentCategoryService contentCategoryService;
 	
 	/**
-	 * 查询列表
+	 * 根据父id查询列表
 	 * @param id
 	 * @return
 	 */
@@ -42,8 +42,38 @@ public class ContentCategoryController {
 	@RequestMapping(value="add",method=RequestMethod.POST)
 	public ResponseEntity<ContentCategory> addContentCategory(ContentCategory contentCategory){
 		
+		try {
+			ContentCategory result = contentCategoryService.saveContentCategory(contentCategory);
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return ResponseEntity.status(500).body(null);
 	}
 	
+	@RequestMapping(value="update",method=RequestMethod.POST)
+	public ResponseEntity<Void> updateContentCategory(ContentCategory contentCategory){
+		
+		try {
+			contentCategoryService.updateSelective(contentCategory);
+			return ResponseEntity.ok(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.status(500).body(null);
+	}
+	
+	@RequestMapping(value="delete",method=RequestMethod.POST)
+	public ResponseEntity<Void> deleteContentCategory(ContentCategory contentCategory){
+		try {
+			contentCategoryService.deleteContentCategory(contentCategory);
+			return ResponseEntity.ok(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.status(500).build();
+	}
 }
