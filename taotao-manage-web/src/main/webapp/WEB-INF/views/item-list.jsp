@@ -60,7 +60,7 @@
         			$("#itemeEditForm").form("load",data);
         			
         			// 加载商品描述
-        			$.getJSON('/rest/item/desc/'+data.id,function(_data){
+        			$.getJSON('/rest/item/desc/'+data.cid,function(_data){
         				itemEditEditor.html(_data.itemDesc);
         			});
         			        			

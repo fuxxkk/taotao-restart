@@ -50,4 +50,17 @@ public class ItemCatController {
 		
 		return ResponseEntity.status(500).body(null);
 	}
+	
+	@RequestMapping(value = "{id}",method=RequestMethod.GET)
+	public ResponseEntity<ItemCat> queryItemCatById(@PathVariable("id")Long id){
+		
+		try {
+			ItemCat itemcat = itemCatService.queryById(id);
+			return ResponseEntity.ok(itemcat);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.status(500).body(null);
+	}
 }
