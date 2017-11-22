@@ -1,11 +1,17 @@
 package com.taotao.manage.service.imp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.vo.DatagridResult;
@@ -21,6 +27,12 @@ public class ContentServiceImp extends BaseServiceImp<Content> implements Conten
 
 	@Autowired
 	private ContentMapper contentMapper;
+	private static final ObjectMapper MAPPER = new ObjectMapper();
+	
+	@Value("${CONTENT_CATEGORY_BIG_AD_ID}")
+	private Long contentCategoryId ;
+	@Value("${TAOTAO_PORTAL_INDEX_BIG_AD_NUMBER}")
+	private Integer adNum ;
 	
 	@Override
 	public DatagridResult queryListByCCid(Long categoryId, Integer page, Integer rows) {
@@ -41,6 +53,34 @@ public class ContentServiceImp extends BaseServiceImp<Content> implements Conten
 		datagridResult.setTotal(pageInfo.getTotal());
 		
 		return datagridResult;
+	}
+
+	@Override
+	public String queryBigAdData() throws Exception {
+		
+		DatagridResult result = queryListByCCid(contentCategoryId, 1, adNum);
+		List<Content> rows = (List<Content>) result.getRows();
+		
+		
+		List<Map<String, Object>> resultList = new ArrayList<>();
+		if(rows!=null&&rows.size()>0) {
+			for (Content content : rows) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("alt", content.getTitle());
+				map.put("height", 240);
+				map.put("heightB", 240);
+				map.put("href", content.getUrl());
+				map.put("src", content.getPic());
+				map.put("srcB", content.getPic2());
+				map.put("width", 670);
+				map.put("widthB", 550);
+				resultList.add(map);
+			}
+		}
+		
+		String resultStr = MAPPER.writeValueAsString(resultList);
+		
+		return resultStr;
 	}
 
 
