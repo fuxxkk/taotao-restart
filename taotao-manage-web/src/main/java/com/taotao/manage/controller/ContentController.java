@@ -1,5 +1,8 @@
 package com.taotao.manage.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -53,5 +56,20 @@ public class ContentController {
 			e.printStackTrace();
 		}
 		return ResponseEntity.status(500).build();
+	}
+	
+	@RequestMapping(value="delete",method=RequestMethod.POST)
+	public ResponseEntity<Map<String, Integer>> deleteContent(@RequestParam("ids")Long ids){
+		
+		try {
+			contentService.deleteById(ids);
+			Map<String, Integer> result = new HashMap<>();
+			result.put("status", 200);
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.status(500).body(null); 
 	}
 }
