@@ -3,10 +3,14 @@ package com.test;
 import static org.junit.Assert.*;
 
 import java.rmi.server.ExportException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
+import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
 
 public class RedisTest {
@@ -31,5 +35,22 @@ public class RedisTest {
 		redis.expire("test111", 15);
 		System.out.println(redis.get("test111"));
 	}
-
+	
+	@Test
+	public void testCluster() {
+		Set<HostAndPort> nodes = new HashSet<>();
+		nodes.add(new HostAndPort("192.168.12.168", 7001));
+		nodes.add(new HostAndPort("192.168.12.168", 7002));
+		nodes.add(new HostAndPort("192.168.12.168", 7003));
+		nodes.add(new HostAndPort("192.168.12.168", 7004));
+		nodes.add(new HostAndPort("192.168.12.168", 7005));
+		nodes.add(new HostAndPort("192.168.12.168", 7006));
+		
+		JedisCluster jedisCluster = new JedisCluster(nodes);
+		
+		jedisCluster.set("test", "123321");
+		jedisCluster.expire("test", 60);
+		
+		System.out.println(jedisCluster.get("test"));
+	}
 }
