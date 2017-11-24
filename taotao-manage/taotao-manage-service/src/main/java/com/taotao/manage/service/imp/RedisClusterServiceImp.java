@@ -8,43 +8,38 @@ import redis.clients.jedis.JedisCluster;
 
 public class RedisClusterServiceImp implements RedisService {
 	
-	@Autowired
+	@Autowired(required=false)
 	private JedisCluster jedisCluster;
 	
 	@Override
 	public String set(String key, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return jedisCluster.set(key, value);
 	}
 
 	@Override
 	public String setex(String key, Integer second, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		return jedisCluster.setex(key, second, value);
 	}
 
 	@Override
 	public Long expire(String key, Integer second) {
-		// TODO Auto-generated method stub
-		return null;
+		return jedisCluster.expire(key, second);
 	}
 
 	@Override
 	public String get(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		return jedisCluster.get(key);
 	}
 
 	@Override
 	public Long del(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		return jedisCluster.del(key);
 	}
 
 	@Override
 	public Long incr(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		return jedisCluster.incr(key);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.taotao.common.vo.DatagridResult;
 import com.taotao.manage.mapper.ContentMapper;
 import com.taotao.manage.pojo.Content;
 import com.taotao.manage.service.ContentService;
+import com.taotao.manage.service.RedisService;
 
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
@@ -33,6 +35,9 @@ public class ContentServiceImp extends BaseServiceImp<Content> implements Conten
 	private Long contentCategoryId ;
 	@Value("${TAOTAO_PORTAL_INDEX_BIG_AD_NUMBER}")
 	private Integer adNum ;
+	
+	@Autowired
+	private RedisService redisService;
 	
 	@Override
 	public DatagridResult queryListByCCid(Long categoryId, Integer page, Integer rows) {
@@ -58,9 +63,18 @@ public class ContentServiceImp extends BaseServiceImp<Content> implements Conten
 	@Override
 	public String queryBigAdData() throws Exception {
 		
+		try {
+			String bigAd = redisService.get("BIG_AD");
+			if(StringUtils.isNotEmpty(bigAd)) {
+				return bigAd;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		DatagridResult result = queryListByCCid(contentCategoryId, 1, adNum);
 		List<Content> rows = (List<Content>) result.getRows();
-		
 		
 		List<Map<String, Object>> resultList = new ArrayList<>();
 		if(rows!=null&&rows.size()>0) {
@@ -77,9 +91,13 @@ public class ContentServiceImp extends BaseServiceImp<Content> implements Conten
 				resultList.add(map);
 			}
 		}
-		
 		String resultStr = MAPPER.writeValueAsString(resultList);
 		
+		try {
+			redisService.setex("BIG_AD", 3600,resultStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return resultStr;
 	}
 
