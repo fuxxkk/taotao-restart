@@ -30,13 +30,13 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<servlet-mapping>
-		<servlet-name>taotao-portal</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
-
 	<!-- <servlet-mapping>
 		<servlet-name>taotao-portal</servlet-name>
-		<url-pattern>/service/*</url-pattern>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping> -->
+
+	<servlet-mapping>
+		<servlet-name>taotao-portal</servlet-name>
+		<url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
 </web-app>
