@@ -1,4 +1,5 @@
-package com.taotao.manage.service;
+package com.taotao.rediseService;
+
 
 public interface RedisService {
 	

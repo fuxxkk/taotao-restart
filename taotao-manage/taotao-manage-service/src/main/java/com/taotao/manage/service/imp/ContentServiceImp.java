@@ -19,7 +19,7 @@ import com.taotao.common.vo.DatagridResult;
 import com.taotao.manage.mapper.ContentMapper;
 import com.taotao.manage.pojo.Content;
 import com.taotao.manage.service.ContentService;
-import com.taotao.manage.service.RedisService;
+import com.taotao.rediseService.RedisService;
 
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
