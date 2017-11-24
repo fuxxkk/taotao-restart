@@ -1,5 +1,7 @@
 package com.taotao.sso.service.imp;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,6 +55,13 @@ public class UserServiceImp implements UserService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public void saveUser(User user) {	
+		user.setCreated(new Date());
+		user.setUpdated(new Date());
+		userMapper.insertSelective(user);
 	}
 	
 	
