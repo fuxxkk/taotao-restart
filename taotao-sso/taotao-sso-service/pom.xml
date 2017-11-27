@@ -89,5 +89,10 @@
 			<artifactId>zkclient</artifactId>
 		</dependency>
 		
+		<!-- 加密解密 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
 	</dependencies>
 </project>

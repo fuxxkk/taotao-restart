@@ -1,12 +1,16 @@
 package com.taotao.sso.service.imp;
 
 import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jolbox.bonecp.UsernamePassword;
 import com.taotao.rediseService.RedisService;
 import com.taotao.sso.mapper.UserMapper;
 import com.taotao.sso.pojo.User;
@@ -20,6 +24,11 @@ public class UserServiceImp implements UserService{
 	
 	@Value("${TICKET_PREFIX}")
 	private String ticket_prefix;
+	@Value("${expire}")
+	private Integer expireTime;
+	
+	
+	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	@Autowired
 	private RedisService redisService;
@@ -51,7 +60,7 @@ public class UserServiceImp implements UserService{
 		String key = ticket_prefix+ticket;
 		String result = redisService.get(key);
 		if(StringUtils.isNotEmpty(result)) {
-			redisService.expire(key, 3600);
+			redisService.expire(key, expireTime);
 		}
 		
 		return result;
@@ -61,7 +70,23 @@ public class UserServiceImp implements UserService{
 	public void saveUser(User user) {	
 		user.setCreated(new Date());
 		user.setUpdated(new Date());
+		user.setPassword(DigestUtils.md5Hex(user.getPassword()));
 		userMapper.insertSelective(user);
+	}
+
+	@Override
+	public String login(User user) throws Exception {
+		
+		user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+		List<User> result = userMapper.select(user);
+		if(result!=null&&result.size()>0) {
+			User tmp = result.get(0);
+			String resultStr = MAPPER.writeValueAsString(tmp);
+			String md5Hex = DigestUtils.md5Hex(user.getUsername()+System.currentTimeMillis());
+			redisService.setex(ticket_prefix+md5Hex, expireTime, resultStr);
+			return md5Hex;
+		}
+		return null;
 	}
 	
 	

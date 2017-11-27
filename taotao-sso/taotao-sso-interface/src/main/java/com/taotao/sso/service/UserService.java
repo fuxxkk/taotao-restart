@@ -9,4 +9,6 @@ public interface UserService {
 	String checkTicket(String ticket);
 	
 	void saveUser(User user);
+
+	String login(User user) throws Exception;
 }
