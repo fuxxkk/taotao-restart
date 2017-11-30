@@ -16,7 +16,8 @@ public class IndexController {
 	
 	@RequestMapping(value = "index",method=RequestMethod.GET)
 	public ModelAndView index() {
-		
+
+		//111
 		ModelAndView mv = new ModelAndView( "index");
 		try {
 			String str = contentService.queryBigAdData();
