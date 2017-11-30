@@ -1,6 +1,5 @@
 package com.taotao.sso.controller;
 
-import java.lang.annotation.Repeatable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class UserController {
 	private UserService userService;
 	
 	/**
-	 * 判断类型是否存在
+	 * 判断类型是否存在111
 	 * @param param
 	 * @param type
 	 * @return
