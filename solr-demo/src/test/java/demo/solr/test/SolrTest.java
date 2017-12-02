@@ -10,9 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class SolrTest {
@@ -21,7 +19,7 @@ public class SolrTest {
 
     @Before
     public void setup() throws Exception{
-        httpSolrServer = new HttpSolrServer("http://solr.taotao.com/solr");
+        httpSolrServer = new HttpSolrServer("http://192.168.12.168:8383/solr");
     }
 
     /**
@@ -56,6 +54,7 @@ public class SolrTest {
     @Test
     public void query() throws SolrServerException {
         List<SolrItem> list = doSearch("小米", 1, 10);
+        System.out.println(list);
     }
 
     public List<SolrItem> doSearch(String keyword,int page,int rows) throws SolrServerException {
@@ -81,6 +80,7 @@ public class SolrTest {
         List<SolrItem> list = query.getBeans(SolrItem.class);
         if(isHighLight){
             Map<String, Map<String, List<String>>> highlighting = query.getHighlighting();
+            System.out.println(highlighting);
             for (SolrItem solrItem:list) {
                 solrItem.setTitle(highlighting.get(solrItem.getId().toString()).get("title").get(0));
             }
