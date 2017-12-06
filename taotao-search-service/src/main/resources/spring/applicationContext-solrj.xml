@@ -12,14 +12,14 @@
     <context:property-placeholder location="classpath:solrj.properties"/>
 
     <!-- 定义cloudSolrServer -->
-    <bean id="cloudSolrServer" class="org.apache.solr.client.solrj.impl.CloudSolrServer">
-        <!-- 设置zookeeper集群信息 -->
+    <!--<bean id="cloudSolrServer" class="org.apache.solr.client.solrj.impl.CloudSolrServer">
+        &lt;!&ndash; 设置zookeeper集群信息 &ndash;&gt;
         <constructor-arg name="zkHost" value="${solr.zkHost}"></constructor-arg>
-        <!-- solr集群collection的名字 -->
+        &lt;!&ndash; solr集群collection的名字 &ndash;&gt;
         <property name="defaultCollection" value="${solr.defaultCollection}"></property>
-    </bean>
+    </bean>-->
     <bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-        <constructor-arg name="baseURL" value="192.168.12.168:8383"></constructor-arg>
+        <constructor-arg name="baseURL" value="http://192.168.12.168:8383/solr"></constructor-arg>
     </bean>
 </beans>
 

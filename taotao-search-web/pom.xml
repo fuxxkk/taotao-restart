@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.taotao</groupId>
             <artifactId>taotao-search-interface</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- Spring -->
         <dependency>
@@ -100,6 +100,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jms</artifactId>
+        </dependency>
+
+        <!--引入 taotao-interface 依赖包-->
+        <dependency>
+            <groupId>com.taotao</groupId>
+            <artifactId>taotao-manage-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
