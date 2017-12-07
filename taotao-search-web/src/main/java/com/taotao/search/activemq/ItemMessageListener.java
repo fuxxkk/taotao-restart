@@ -4,7 +4,6 @@ import com.taotao.manage.pojo.Item;
 import com.taotao.manage.service.ItemService;
 import com.taotao.search.pojo.SolrItem;
 import com.taotao.search.service.SearchService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.adapter.AbstractAdaptableMessageListener;
 

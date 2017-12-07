@@ -22,8 +22,8 @@
             </list>
         </property>
     </bean>-->
-    <!-- 加载配置文件 -->
-    <context:property-placeholder location="classpath:activemq.properties"/>
+<!--    &lt;!&ndash; 加载配置文件 &ndash;&gt;
+    <context:property-placeholder location="classpath:activemq.properties"/>-->
 
     <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
     <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">

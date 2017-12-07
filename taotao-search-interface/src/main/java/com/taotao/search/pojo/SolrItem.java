@@ -73,4 +73,16 @@ public class SolrItem implements Serializable {
     	}
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "SolrItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", sellPoint='" + sellPoint + '\'' +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.taotao.manage.controller;
 
 import org.apache.activemq.command.ActiveMQMapMessage;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
@@ -32,6 +33,9 @@ public class ItemController {
 
 	@Autowired
 	private JmsTemplate jmsTemplate;
+
+	@Autowired
+	private ActiveMQTopic itemTopicDestination;
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> saveItem(Item item,@RequestParam(value="desc",required=false)String desc){
@@ -98,7 +102,7 @@ public class ItemController {
 	  **/
 	private void sendMessage(final String type,final Long itemId){
 		try {
-			jmsTemplate.send("itemTopicDestination", new MessageCreator() {
+			jmsTemplate.send(itemTopicDestination, new MessageCreator() {
                 @Override
                 public Message createMessage(Session session) throws JMSException {
 
