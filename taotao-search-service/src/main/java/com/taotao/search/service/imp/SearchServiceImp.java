@@ -11,6 +11,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,12 @@ public class SearchServiceImp implements SearchService {
     @Override
     public void saveOrUpdateItemList(List<SolrItem> solrItemList) throws Exception{
         httpSolrServer.addBeans(solrItemList);
+        httpSolrServer.commit();
+    }
+
+    @Override
+    public void saveOrUpdateItem(SolrItem solrItem) throws Exception {
+        httpSolrServer.addBean(solrItem);
         httpSolrServer.commit();
     }
 
@@ -75,5 +82,11 @@ public class SearchServiceImp implements SearchService {
         datagridResult.setRows(solrItemList);
         datagridResult.setTotal(count);
         return datagridResult;
+    }
+
+    @Override
+    public void deleteItem(Long id) throws IOException, SolrServerException {
+        httpSolrServer.deleteById(id+"");
+        httpSolrServer.commit();
     }
 }

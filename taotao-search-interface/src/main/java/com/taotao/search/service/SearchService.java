@@ -9,5 +9,9 @@ public interface SearchService {
 
     void saveOrUpdateItemList(List<SolrItem> solrItemList) throws Exception;
 
+    void saveOrUpdateItem(SolrItem solrItem) throws Exception;
+
     DatagridResult search(String keyword,Integer page) throws Exception;
+
+    void deleteItem(Long id)throws Exception;
 }
