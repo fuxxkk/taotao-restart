@@ -1,5 +1,7 @@
 package com.taotao.manage.pojo;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -87,6 +89,13 @@ public class Item extends BasePojo {
 
     public String getImage() {
         return image;
+    }
+
+    public String[] getImages() {
+        if(StringUtils.isNotEmpty(image)){
+            return this.getImage().split(",");
+        }
+        return null;
     }
 
     public void setImage(String image) {
