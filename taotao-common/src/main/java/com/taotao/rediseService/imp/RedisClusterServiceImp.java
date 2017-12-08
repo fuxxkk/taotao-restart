@@ -1,10 +1,8 @@
 package com.taotao.rediseService.imp;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.taotao.rediseService.RedisService;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.JedisCluster;
 
 public class RedisClusterServiceImp implements RedisService {

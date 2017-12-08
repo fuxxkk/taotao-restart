@@ -2,17 +2,15 @@ package com.taotao.manage.service.imp;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.taotao.manage.pojo.BasePojo;
+import com.taotao.manage.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.pagehelper.PageHelper;
-import com.taotao.manage.mapper.ItemCatMapper;
-import com.taotao.manage.pojo.BasePojo;
-import com.taotao.manage.service.BaseService;
 
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;

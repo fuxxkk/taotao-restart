@@ -1,24 +1,22 @@
 package com.taotao.manage.service.imp;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.taotao.manage.mapper.ContentMapper;
+import com.taotao.manage.pojo.Content;
+import com.taotao.manage.service.ContentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.vo.DatagridResult;
-import com.taotao.manage.mapper.ContentMapper;
-import com.taotao.manage.pojo.Content;
-import com.taotao.manage.service.ContentService;
 import com.taotao.rediseService.RedisService;
 
 import tk.mybatis.mapper.entity.Example;

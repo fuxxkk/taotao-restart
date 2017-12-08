@@ -2,11 +2,7 @@ package com.taotao.manage.fileuputils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.apache.bcel.classfile.annotation.NameValuePair;
-import org.csource.fastdfs.ClientGlobal;
-import org.csource.fastdfs.StorageClient;
-import org.csource.fastdfs.StorageServer;
-import org.csource.fastdfs.TrackerClient;
-import org.csource.fastdfs.TrackerServer;
+import org.csource.fastdfs.*;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FastDFSUtils {

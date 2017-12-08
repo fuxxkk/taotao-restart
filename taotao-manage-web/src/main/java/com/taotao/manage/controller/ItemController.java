@@ -1,5 +1,6 @@
 package com.taotao.manage.controller;
 
+import com.taotao.manage.service.ItemService;
 import org.apache.activemq.command.ActiveMQMapMessage;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.vo.DatagridResult;
 import com.taotao.manage.pojo.Item;
-import com.taotao.manage.service.ItemService;
 
 import javax.jms.JMSException;
-import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.Session;
-import java.util.HashMap;
-import java.util.Map;
 
 @RequestMapping("item")
 @Controller

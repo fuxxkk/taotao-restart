@@ -7,7 +7,6 @@ import com.taotao.search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.adapter.AbstractAdaptableMessageListener;
 
-import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.Session;

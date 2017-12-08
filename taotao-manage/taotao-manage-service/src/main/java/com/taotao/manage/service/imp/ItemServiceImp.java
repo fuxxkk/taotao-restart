@@ -1,10 +1,14 @@
 package com.taotao.manage.service.imp;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 
+import com.taotao.manage.mapper.ItemDescMapper;
+import com.taotao.manage.mapper.ItemMapper;
+import com.taotao.manage.pojo.Item;
+import com.taotao.manage.pojo.ItemDesc;
+import com.taotao.manage.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,18 +16,12 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.vo.DatagridResult;
-import com.taotao.manage.mapper.ItemCatMapper;
-import com.taotao.manage.mapper.ItemDescMapper;
-import com.taotao.manage.mapper.ItemMapper;
-import com.taotao.manage.pojo.Item;
-import com.taotao.manage.pojo.ItemDesc;
-import com.taotao.manage.service.ItemService;
 
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Service
-public class ItemServiceImp extends BaseServiceImp<Item> implements ItemService{
+public class ItemServiceImp extends BaseServiceImp<Item> implements ItemService {
 	
 	@Autowired
 	private ItemMapper itemMapper;

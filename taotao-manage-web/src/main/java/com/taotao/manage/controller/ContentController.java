@@ -3,6 +3,7 @@ package com.taotao.manage.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.taotao.manage.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.taotao.common.vo.DatagridResult;
 import com.taotao.manage.pojo.Content;
-import com.taotao.manage.service.ContentService;
 
 @Controller
 @RequestMapping("content")

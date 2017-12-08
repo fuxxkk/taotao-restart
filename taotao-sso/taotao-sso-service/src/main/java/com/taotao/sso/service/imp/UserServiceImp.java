@@ -3,6 +3,8 @@ package com.taotao.sso.service.imp;
 import java.util.Date;
 import java.util.List;
 
+import com.taotao.sso.mapper.UserMapper;
+import com.taotao.sso.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +12,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jolbox.bonecp.UsernamePassword;
 import com.taotao.rediseService.RedisService;
-import com.taotao.sso.mapper.UserMapper;
 import com.taotao.sso.pojo.User;
-import com.taotao.sso.service.UserService;
 
 @Service
-public class UserServiceImp implements UserService{
+public class UserServiceImp implements UserService {
 	
 	@Autowired
 	private UserMapper userMapper;
