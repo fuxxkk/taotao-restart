@@ -17,7 +17,7 @@ import com.taotao.sso.pojo.User;
 
 @Service
 public class UserServiceImp implements UserService {
-	
+//	/111111
 	@Autowired
 	private UserMapper userMapper;
 	
