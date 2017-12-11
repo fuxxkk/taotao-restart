@@ -92,7 +92,7 @@ public class Item extends BasePojo {
     }
 
     public String[] getImages() {
-        if(StringUtils.isNotEmpty(image)){
+        if (StringUtils.isNotEmpty(image)) {
             return this.getImage().split(",");
         }
         return null;
