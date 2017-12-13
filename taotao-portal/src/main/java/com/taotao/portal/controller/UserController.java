@@ -25,9 +25,9 @@ public class UserController {
 	private UserService userService;
 	
 	@Value("${cookiename}")
-	public static String COOKIE_NAME;
+	public  String COOKIE_NAME;
 	@Value("${cookiemaxage}")
-	public static Integer COOKIE_MAX_AGE;
+	public  Integer COOKIE_MAX_AGE;
 	
 	@RequestMapping(value="doRegister",method=RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> doRegister(User user){

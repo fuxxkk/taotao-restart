@@ -1,6 +1,6 @@
 var TT = TAOTAO = {
     checkLogin: function () {
-        var _ticket = $.cookie("TT_TICKET");
+        var _ticket = $.cookie("ttuserTicket");
         if (!_ticket) {
             return;
         }

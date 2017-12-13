@@ -9,7 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CartServiceImp implements CartService {
@@ -43,5 +46,22 @@ public class CartServiceImp implements CartService {
             cart.setUserId(userId);
         }
         redisService.hset(key, field, MAPPER.writeValueAsString(cart));
+    }
+
+    @Override
+    public List<Cart> queryListByUserId(Long userId) throws Exception {
+
+        List<String> items = redisService.hvals(REDIS_CART_KEY + userId);
+        List<Cart> cartList =null;
+        if (items != null && items.size() > 0) {
+            cartList = new ArrayList<>();
+            for (String cartJson :
+                    items) {
+                Cart cart = MAPPER.readValue(cartJson, Cart.class);
+                cartList.add(cart);
+            }
+        }
+
+        return cartList;
     }
 }
