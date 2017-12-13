@@ -19,7 +19,7 @@ public class UserController {
 	private UserService userService;
 	
 	/**
-	 * 判断类型是否存在11122222
+	 * 判断类型是否存在
 	 * @param param
 	 * @param type
 	 * @return

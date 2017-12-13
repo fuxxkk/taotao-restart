@@ -11,4 +11,6 @@ public interface UserService {
 	void saveUser(User user);
 
 	String login(User user) throws Exception;
+
+	User queryByTicket(String ticket) throws Exception;
 }

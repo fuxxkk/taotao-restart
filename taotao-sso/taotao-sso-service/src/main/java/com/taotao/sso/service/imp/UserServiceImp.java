@@ -1,5 +1,6 @@
 package com.taotao.sso.service.imp;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -86,7 +87,22 @@ public class UserServiceImp implements UserService {
 		}
 		return null;
 	}
-	
-	
-	
+
+	@Override
+	public User queryByTicket(String ticket) throws Exception {
+		ticket = ticket_prefix+ticket;
+		try {
+			String jsonUser = redisService.get(ticket);
+			redisService.expire(ticket, expireTime);
+			if(StringUtils.isNotEmpty(jsonUser)){
+				User user = MAPPER.readValue(jsonUser, User.class);
+				return user;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 }

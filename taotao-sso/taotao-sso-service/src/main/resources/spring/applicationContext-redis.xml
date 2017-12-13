@@ -49,8 +49,8 @@
 	</bean>
 	
 	<!-- 单机版redis -->
-	<!-- <bean id="redisPoolServiceImp" class="com.taotao.rediseService.imp.RedisPoolServiceImp"></bean> -->
+	 <bean id="redisPoolServiceImp" class="com.taotao.rediseService.imp.RedisPoolServiceImp"></bean>
 	
 	<!-- 集群版redis；开发环境可以只使用单机版，所以注释集群版的实现类 -->
-	<bean id="redisClusterServiceImp" class="com.taotao.rediseService.imp.RedisClusterServiceImp"></bean>
+	<!--<bean id="redisClusterServiceImp" class="com.taotao.rediseService.imp.RedisClusterServiceImp"></bean>-->
 </beans>
