@@ -1,6 +1,8 @@
 package com.taotao.rediseService;
 
 
+import java.util.List;
+
 public interface RedisService {
 	
 	public String set(String key, String value);
@@ -14,4 +16,12 @@ public interface RedisService {
 	public Long del(String key);
 	
 	public Long incr(String key);
+
+	public Long hset(String key, String field, String value);
+
+	public String hget(String key, String field);
+
+	public List<String> hvals(String key);
+
+	public Long hdel(String key, String field);
 }
