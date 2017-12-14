@@ -16,4 +16,6 @@ public interface CookieService {
     void updateCart(Long itemId, Integer num,HttpServletRequest request,HttpServletResponse response) throws Exception;
 
     void deleteItem(Long itemId,HttpServletRequest request,HttpServletResponse response) throws  Exception;
+
+    void addCookieCart(HttpServletRequest request, Long userid) throws Exception;
 }

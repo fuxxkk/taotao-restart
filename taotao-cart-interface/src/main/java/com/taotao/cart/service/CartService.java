@@ -3,7 +3,6 @@ package com.taotao.cart.service;
 import com.taotao.cart.pojo.Cart;
 import com.taotao.manage.pojo.Item;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface CartService {
@@ -15,4 +14,5 @@ public interface CartService {
     void updateNumByItemIdAndUserId(Long userId, Long itemId, Integer num) throws Exception;
 
     void deleteItem(Long userId, Long itemId);
+
 }

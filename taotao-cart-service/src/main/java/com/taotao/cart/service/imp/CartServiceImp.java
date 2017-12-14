@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,4 +79,6 @@ public class CartServiceImp implements CartService {
     public void deleteItem(Long userId, Long itemId) {
         redisService.hdel(REDIS_CART_KEY+userId.toString(), itemId.toString());
     }
+
+
 }

@@ -2,10 +2,13 @@ package com.taotao.portal.service.imp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cart.pojo.Cart;
+import com.taotao.cart.service.CartService;
 import com.taotao.manage.pojo.Item;
 import com.taotao.manage.service.ItemService;
 import com.taotao.portal.service.CookieService;
 import com.taotao.portal.util.CookieUtils;
+import com.taotao.rediseService.RedisService;
+import com.taotao.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +27,15 @@ public class CookieServiceImp implements CookieService {
     private static final String COOKIE_CART_NAME = "tt_cart";
     private static final int COOKIE_CART_MAX_AGE=3600*7;
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final String REDIS_CART_KEY = "TT_CART";
+
 
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private RedisService redisService;
+    @Autowired
+    private CartService cartService;
 
     @Override
     public List<Cart> queryCartList(HttpServletRequest request) throws IOException {
@@ -106,6 +115,44 @@ public class CookieServiceImp implements CookieService {
 
             CookieUtils.setCookie(request,response,COOKIE_CART_NAME,MAPPER.writeValueAsString(cartList),COOKIE_CART_MAX_AGE,true);
         }
+    }
+
+    @Override
+    public void addCookieCart(HttpServletRequest request, Long userId) throws Exception {
+        List<Cart> cartListCookie = queryCartList(request);
+        List<Cart> cartListRedis = cartService.queryListByUserId(userId);
+
+
+        List<Cart> result = null;
+        if (cartListCookie != null && cartListCookie.size() > 0) {
+            result = cartListCookie;
+            if(cartListRedis !=null&&cartListRedis.size()>0) {
+                int size = result.size();
+                for (int i = 0; i< size; i++) {
+                    for (int j = 0;j<cartListRedis.size();j++) {
+                        if (result.get(i).getItemId().equals(cartListRedis.get(j).getItemId())) {
+                            result.get(i).setNum(result.get(i).getNum()+cartListRedis.get(j).getNum());
+                        }else {
+                            result.add(cartListRedis.get(j));
+                        }
+                    }
+                }
+            }
+        }else {
+            if(cartListRedis !=null&&cartListRedis.size()>0) {
+                result = cartListRedis;
+            }
+        }
+
+        //保存到redis
+        if (result != null && result.size() > 0) {
+            for (Cart cart :
+                    result) {
+                redisService.hset(REDIS_CART_KEY+userId.toString(), cart.getItemId().toString(), MAPPER.writeValueAsString(cart));
+            }
+        }
+
+
     }
 
 }
