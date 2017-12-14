@@ -20,6 +20,13 @@
 	
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
+	<!--配置拦截器-->
+	<mvc:interceptors>
+		<mvc:interceptor >
+			<mvc:mapping path="/order/**"/>
+			<bean class="com.taotao.portal.interceptor.OrderHandlerInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- 配置视图解析器 ,配置前缀和后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
