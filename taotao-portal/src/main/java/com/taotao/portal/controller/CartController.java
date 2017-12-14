@@ -4,11 +4,14 @@ import com.taotao.cart.pojo.Cart;
 import com.taotao.cart.service.CartService;
 import com.taotao.manage.pojo.Item;
 import com.taotao.manage.service.ItemService;
+import com.taotao.portal.service.CookieService;
+import com.taotao.portal.service.imp.CookieServiceImp;
 import com.taotao.portal.util.CookieUtils;
 import com.taotao.sso.pojo.User;
 import com.taotao.sso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,8 @@ public class CartController {
     private CartService cartService;
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private CookieService cookieService;
 
     @RequestMapping(value = "/{itemId}/{num}",method = RequestMethod.GET)
     public String addCart(@PathVariable("itemId")Long itemId, @PathVariable("num")Integer num, HttpServletRequest request,
@@ -43,7 +48,7 @@ public class CartController {
                 Item item = itemService.queryById(itemId);
                 cartService.addCart(user.getId(),item,num);
             } else {  //未登录,保存到cookie
-
+                cookieService.addCart(itemId,num,request,response);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,7 +70,7 @@ public class CartController {
                  cartList = cartService.queryListByUserId(user.getId());
             }else {
                 //未登录
-
+                cartList = cookieService.queryCartList(request);
             }
             mv.addObject("cartList",cartList);
         } catch (Exception e) {
@@ -73,5 +78,43 @@ public class CartController {
         }
 
         return mv;
+    }
+
+    @RequestMapping(value = "/update/num/{itemId}/{num}",method = RequestMethod.POST)
+    public ResponseEntity<Void> updateItemNum(@PathVariable("itemId")Long itemId,@PathVariable("num")Integer num,HttpServletRequest request,HttpServletResponse response) {
+
+        try {
+            String ticket = CookieUtils.getCookieValue(request, COOKIE_NAME );
+            User user = userService.queryByTicket(ticket);
+            if (user != null) {
+                cartService.updateNumByItemIdAndUserId(user.getId(), itemId, num);
+            } else {
+                cookieService.updateCart(itemId,num,request,response);
+            }
+            return ResponseEntity.ok(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.status(500).build();
+    }
+
+    @RequestMapping(value = "/delete/{itemId}",method = RequestMethod.GET)
+    public String deleteItem(@PathVariable("itemId")Long itemId,HttpServletRequest request,HttpServletResponse response) {
+
+        try {
+            String ticket = CookieUtils.getCookieValue(request, COOKIE_NAME);
+            User user = userService.queryByTicket(ticket);
+            if (user != null) {
+                cartService.deleteItem(user.getId(),itemId);
+            } else {
+                cookieService.deleteItem(itemId,request,response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return "redirect:/cart/show.html";
     }
 }

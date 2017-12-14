@@ -64,4 +64,20 @@ public class CartServiceImp implements CartService {
 
         return cartList;
     }
+
+    @Override
+    public void updateNumByItemIdAndUserId(Long userId, Long itemId, Integer num) throws Exception {
+        String key  = REDIS_CART_KEY+userId;
+        String itemJson = redisService.hget(key, itemId.toString());
+        if (StringUtils.isNotEmpty(itemJson)) {
+            Cart cart = MAPPER.readValue(itemJson, Cart.class);
+            cart.setNum(num);
+            redisService.hset(key, itemId.toString(), MAPPER.writeValueAsString(cart));
+        }
+    }
+
+    @Override
+    public void deleteItem(Long userId, Long itemId) {
+        redisService.hdel(REDIS_CART_KEY+userId.toString(), itemId.toString());
+    }
 }
