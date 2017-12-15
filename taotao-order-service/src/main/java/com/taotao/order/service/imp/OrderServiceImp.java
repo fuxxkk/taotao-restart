@@ -3,6 +3,8 @@ package com.taotao.order.service.imp;
 import com.taotao.order.mapper.OrderMapper;
 import com.taotao.order.pojo.Order;
 import com.taotao.order.service.OrderService;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,11 @@ public class OrderServiceImp implements OrderService {
     public Order queryOrderByOrderId(String orderId) {
 
         return orderMapper.queryOrderByOrderId(orderId);
+    }
+
+    @Override
+    public void autoCloseOrder() {
+        orderMapper.autoCloseOrder(DateTime.now().minusDays(2).toDate());
+        System.out.println("执行quartz..");
     }
 }

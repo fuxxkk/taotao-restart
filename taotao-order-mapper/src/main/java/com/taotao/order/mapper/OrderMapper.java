@@ -4,6 +4,8 @@ import com.taotao.order.pojo.Order;
 import com.taotao.order.pojo.OrderItem;
 import com.taotao.order.pojo.OrderShipping;
 
+import java.util.Date;
+
 public interface OrderMapper {
 
     void saveOrder(Order order);
@@ -13,4 +15,6 @@ public interface OrderMapper {
     OrderShipping queryOrderShippingByOrderId(String orderId);*/
 
     Order queryOrderByOrderId(String orderId);
+
+    void autoCloseOrder(Date date);
 }
