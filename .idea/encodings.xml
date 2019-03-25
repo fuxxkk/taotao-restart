@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/demo-redis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jvmInfoDemo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/solr-demo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/solrjdemo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-cart" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-cart-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-cart-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-item-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-manage-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-manage/taotao-manage-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-manage/taotao-manage-mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-manage/taotao-manage-pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-manage/taotao-manage-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-portal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-search-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-search-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-search-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso/taotao-sso-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso/taotao-sso-mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso/taotao-sso-pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso/taotao-sso-service" charset="UTF-8" />
+    <file url="file://F:/HEIMAJAVAEE/89_淘淘商城10_搜索完善&amp;ActiveMQ/day10(商品搜索实现&amp;ActiveMQ&amp;商品同步)/资料/itcast-activemq" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
